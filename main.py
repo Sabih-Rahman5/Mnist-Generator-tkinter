@@ -34,6 +34,7 @@ def generate_images():
     row = int(e3.get())
 
     save_fake_images(num, idx, row)
+    display_image(idx)
 
 
 
@@ -48,9 +49,9 @@ def save_fake_images(num, index, rows):
     save_image(denorm(fake_images), os.path.join(sample_dir, fake_fname), nrow=rows)
 
 
-def display_image():
-    # index = int(e2.get())
-    img = PhotoImage(file=r'samples\fake_images-{0:0=4d}.png'.format(0)).subsample(1, 1)
+def display_image(idx):
+    global img
+    img = PhotoImage(file=r'samples\fake_images-{0:0=4d}.png'.format(idx))
     testlabel.config(image=img)
 
 
@@ -105,24 +106,14 @@ f2 = Frame(window, bg='green')
 f2.place(x=450, y=40, width=1000, height=700)
 #img = PhotoImage(file=r'samples\fake_images-{0:0=4d}.png'.format(0)).subsample(1, 1)
 
-img2 = PhotoImage(file=r'samples\pepe.png').subsample(1, 1)
+img = PhotoImage(file=r'samples\Canvas.png').subsample(2, 3)
 
-testlabel = Label(f2, bg = 'pink', image=img2)
+testlabel = Label(f2, bg='pink', image=img)
 testlabel.place(relx=0.5, rely=0.5, anchor="center")
 
 
-
-
-
-
-
-
-
-
-
-
-b2 = Button(f1, text='Calculate', bd=0, bg='royalblue1', fg='white', width=20, font=('calibre', 9, 'bold'),
-            command=display_image)
+b2 = Button(f1, text='Generate', bd=0, bg='royalblue1', fg='white', width=20, font=('calibre', 9, 'bold'),
+            command=generate_images)
 b2.grid(row=2, column=2, pady=5, padx=50)
 window.mainloop()
 
